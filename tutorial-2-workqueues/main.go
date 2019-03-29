@@ -2,8 +2,7 @@ package main
 
 func main() {
 
-	go func(i int) { consume(i) }(1)
-	go func(i int) { consume(i) }(2)
+	go consume(1)
+	go consume(2)
 	produce()
-
 }
