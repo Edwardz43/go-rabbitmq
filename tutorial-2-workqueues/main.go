@@ -1,8 +1,8 @@
 package main
 
 func main() {
-
-	go consume(1)
-	go consume(2)
+	for i := 0; i < 10; i++ {
+		go consume(i)
+	}
 	produce()
 }

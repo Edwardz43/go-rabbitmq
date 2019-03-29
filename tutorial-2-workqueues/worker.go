@@ -1,7 +1,6 @@
 package main
 
 import (
-	"bytes"
 	"log"
 	"time"
 
@@ -50,9 +49,7 @@ func consume(i int) {
 	go func() {
 		for d := range msgs {
 			log.Printf("\x1b[%dmWorker[%d] Received a message: %s\x1b[0m", 33+i, i, d.Body)
-			dotCount := bytes.Count(d.Body, []byte("."))
-			t := time.Duration(dotCount)
-			time.Sleep(t * time.Second)
+			time.Sleep(10 * time.Second)
 			log.Printf("\x1b[%dmWorker[%d] Done\x1b[0m", 33+i, i)
 			d.Ack(false)
 		}

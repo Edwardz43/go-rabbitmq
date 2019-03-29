@@ -50,8 +50,7 @@ func produce() {
 			log.Printf("\x1b[%dm [x] Sent %s\x1b[0m", 36, body)
 
 		}()
-
-		time.Sleep(time.Duration(rand.Intn(100)) * time.Millisecond)
+		time.Sleep(time.Duration(rand.Intn(5)) * time.Second)
 	}
 }
 
