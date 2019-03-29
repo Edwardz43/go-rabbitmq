@@ -1,4 +1,4 @@
-package lib
+package err
 
 import "log"
 

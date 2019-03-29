@@ -1,8 +1,8 @@
 package main
 
-import "go-rabbitmq/lib"
+import "go-rabbitmq/lib/err"
 
-var failOnError = lib.FailOnError
+var failOnError = err.FailOnError
 
 func main() {
 
