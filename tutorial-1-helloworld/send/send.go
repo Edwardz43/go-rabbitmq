@@ -1,6 +1,8 @@
 package main
 
 import (
+	"flag"
+	"go-rabbitmq/lib/err"
 	"log"
 	"math/rand"
 	"time"
@@ -8,8 +10,16 @@ import (
 	"github.com/streadway/amqp"
 )
 
-func consume(i int) {
-	conn, err := amqp.Dial("amqp://guest:guest@localhost:5672/")
+var failOnError = err.FailOnError
+
+var ip = flag.String("ip", "127.0.0.1", "server IP")
+
+func main() {
+
+	flag.Parse()
+
+	conn, err := amqp.Dial("amqp://docker1:P@ssw0rd@" + *ip + ":5672/")
+
 	failOnError(err, "Failed to connect to RabbitMQ")
 	defer conn.Close()
 
@@ -38,12 +48,12 @@ func consume(i int) {
 				ContentType: "text/plain",
 				Body:        []byte(body),
 			})
-		log.Printf("\x1b[%dmProducer[%d] Sent %s\x1b[0m", 34, i, body)
+		log.Printf("\x1b[%dmProducer Sent %s\x1b[0m", 32, body)
 		failOnError(err, "Failed to publish a message")
 
-		t := rand.Intn(500)
+		t := rand.Intn(10)
 
-		time.Sleep(time.Millisecond * time.Duration(t))
+		time.Sleep(time.Second * time.Duration(t))
 	}
 
 }

@@ -1,13 +1,16 @@
 package main
 
 import (
+	"go-rabbitmq/lib/err"
 	"log"
 
 	"github.com/streadway/amqp"
 )
 
-func produce(i int) {
-	conn, err := amqp.Dial("amqp://guest:guest@localhost:5672/")
+var failOnError = err.FailOnError
+
+func main() {
+	conn, err := amqp.Dial("amqp://test:test@localhost:5672/")
 	failOnError(err, "Failed to connect to RabbitMQ")
 	defer conn.Close()
 
@@ -40,10 +43,10 @@ func produce(i int) {
 
 	go func() {
 		for d := range msgs {
-			log.Printf("\x1b[%dmConsumer[%d] received a message: %s\x1b[0m", 35, i, d.Body)
+			log.Printf("\x1b[%dmConsumer received a message: %s\x1b[0m", 35, d.Body)
 		}
 	}()
 
-	log.Printf(" [%d] Waiting for messages. To exit press CTRL+C", i)
+	log.Printf("Waiting for messages. To exit press CTRL+C")
 	<-forever
 }
