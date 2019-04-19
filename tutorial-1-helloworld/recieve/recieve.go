@@ -1,6 +1,7 @@
 package main
 
 import (
+	"go-rabbitmq/config"
 	"go-rabbitmq/lib/err"
 	"log"
 
@@ -10,7 +11,7 @@ import (
 var failOnError = err.FailOnError
 
 func main() {
-	conn, err := amqp.Dial("amqp://test:test@localhost:5672/")
+	conn, err := amqp.Dial(config.DNS)
 	failOnError(err, "Failed to connect to RabbitMQ")
 	defer conn.Close()
 

@@ -18,7 +18,7 @@ func main() {
 
 	flag.Parse()
 
-	conn, err := amqp.Dial("amqp://docker1:P@ssw0rd@" + *ip + ":5672/")
+	conn, err := amqp.Dial("amqp://docker1:P@ssw0rd@" + *ip + ":35672/")
 
 	failOnError(err, "Failed to connect to RabbitMQ")
 	defer conn.Close()
