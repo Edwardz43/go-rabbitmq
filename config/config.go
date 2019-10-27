@@ -1,4 +1,4 @@
 package config
 
 //DNS is the rabbitmq connection DNS
-var DNS = "amqp://guest:guest@localhost:35672/"
+var DNS = "amqp://docker1:P@ssw0rd@localhost:35672/"
